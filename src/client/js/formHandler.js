@@ -1,36 +1,39 @@
 import "regenerator-runtime/runtime.js";
-
+import validateUrl from "./validationChecker";
 function handleSubmit(event) {
   event.preventDefault();
 
   // check what text was put into the form field
   let formText = document.getElementById("name").value;
   //   Client.checkForName(formText);
+  !validateUrl(formText)
+    ? alert("Invalid URL")
+    : sendUrlToServer("http://localhost:8081/add", { url: formText }).then(
+        (finalData) => {
+          console.log(finalData);
+          // document.getElementById("text").innerHTML = `text: ${finalData[0].text}`;
 
-  sendUrlToServer("http://localhost:8081/add", { url: formText }).then(
-    (finalData) => {
-      console.log(finalData);
-      // document.getElementById("text").innerHTML = `text: ${finalData[0].text}`;
+          document.getElementById(
+            "agreement"
+          ).innerHTML = `Agreement: ${finalData.agreement}`;
 
-      document.getElementById(
-        "agreement"
-      ).innerHTML = `Agreement: ${finalData.agreement}`;
+          document.getElementById(
+            "confidence"
+          ).innerHTML = `confidence: ${finalData.confidence}`;
 
-      document.getElementById(
-        "confidence"
-      ).innerHTML = `confidence: ${finalData.confidence}`;
+          document.getElementById(
+            "subjectivity"
+          ).innerHTML = `subjectivity: ${finalData.subjectivity}`;
 
-      document.getElementById(
-        "subjectivity"
-      ).innerHTML = `subjectivity: ${finalData.subjectivity}`;
+          document.getElementById(
+            "irony"
+          ).innerHTML = `irony: ${finalData.irony}`;
 
-      document.getElementById("irony").innerHTML = `irony: ${finalData.irony}`;
-
-      document.getElementById(
-        "score-tag"
-      ).innerHTML = `score-tag: ${finalData.score_tag}`;
-    }
-  );
+          document.getElementById(
+            "score-tag"
+          ).innerHTML = `score-tag: ${finalData.score_tag}`;
+        }
+      );
 
   // console.log("::: Form Submitted :::");
   // fetch("http://localhost:8081/test")
