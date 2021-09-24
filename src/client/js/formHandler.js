@@ -1,4 +1,4 @@
-import "regenerator-runtime/runtime.js";
+import "regenerator-runtime/runtime.js"; //becaue it's an async function
 import validateUrl from "./validationChecker";
 function handleSubmit(event) {
   event.preventDefault();
@@ -6,11 +6,12 @@ function handleSubmit(event) {
   // check what text was put into the form field
   let formText = document.getElementById("name").value;
   //   Client.checkForName(formText);
+  console.log(validateUrl);
   !validateUrl(formText)
     ? alert("Invalid URL")
     : sendUrlToServer("http://localhost:8081/add", { url: formText }).then(
         (finalData) => {
-          console.log(finalData);
+          // console.log(finalData);
           // document.getElementById("text").innerHTML = `text: ${finalData[0].text}`;
 
           document.getElementById(
