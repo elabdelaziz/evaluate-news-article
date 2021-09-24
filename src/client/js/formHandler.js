@@ -6,7 +6,7 @@ function handleSubmit(event) {
   // check what text was put into the form field
   let formText = document.getElementById("name").value;
   //   Client.checkForName(formText);
-  console.log(validateUrl);
+  // console.log(validateUrl);
   !validateUrl(formText)
     ? alert("Invalid URL")
     : sendUrlToServer("http://localhost:8081/add", { url: formText }).then(
