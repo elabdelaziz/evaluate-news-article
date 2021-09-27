@@ -6,7 +6,8 @@ const express = require("express");
 const mockAPIResponse = require("./mockAPI.js");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const fetch = require("node-fetch");
+// const fetch = require("node-fetch");
+const axios = require("axios");
 
 const API_URL = process.env.API_ID;
 const API_KEY = process.env.API_KEY;
@@ -36,11 +37,34 @@ app.post("/add", async (req, res) => {
   const blogAddress = req.body.url;
   sendUrlData = `${API_URL}?key=${API_KEY}&url=${blogAddress}&lang=en`;
 
-  const apiResponse = await fetch(sendUrlData);
-  const articleData = await apiResponse.json();
-  console.log(res);
-  res.send(articleData);
-  console.log("sent");
+  // const apiResponse = await axios(sendUrlData);
+  // const articleData = await apiResponse.json();
+  // console.log(res);
+  // res.send(apiResponse);
+  // console.log("sent");
+
+  try {
+    const {
+      data: {
+        sentence_list,
+        score_tag,
+        agreement,
+        subjectivity,
+        confidence,
+        irony,
+      },
+    } = await axios(sendUrlData);
+    res.send({
+      text: sentence_list[0].text || "",
+      score_tag: score_tag,
+      agreement: agreement,
+      subjectivity: subjectivity,
+      confidence: confidence,
+      irony: irony,
+    });
+  } catch (error) {
+    console.log(error.message);
+  }
 });
 
 module.exports = {
