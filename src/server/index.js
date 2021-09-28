@@ -18,10 +18,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(express.static("dist"));
 
-console.log(__dirname);
+// console.log(__dirname);
 
 app.get("/", function (req, res) {
-  res.sendFile(path.resolve("dist/index.html")); // check again
+  res.sendFile(path.resolve(__dirname, "dist/index.html"));
   // res.sendFile(path.resolve("src/client/views/index.html"));
 });
 // designates what port the app will listen to for incoming requests
