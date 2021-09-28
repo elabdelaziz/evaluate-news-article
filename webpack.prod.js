@@ -5,6 +5,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 // const WorkboxPlugin = require("workbox-webpack-plugin");
+const { EnvironmentPlugin } = require("webpack");
 
 module.exports = {
   entry: ["regenerator-runtime/runtime.js", "./src/client/index.js"],
@@ -36,5 +37,8 @@ module.exports = {
     }),
     new MiniCssExtractPlugin({ filename: "[name].css" }),
     // new WorkboxPlugin.GenerateSW(),
+    new EnvironmentPlugin({
+      TARGET_PATH: "https://evaluate-article.netlify.app/add",
+    }),
   ],
 };
