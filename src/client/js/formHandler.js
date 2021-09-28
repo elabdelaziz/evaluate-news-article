@@ -5,11 +5,12 @@ function handleSubmit(event) {
 
   // check what text was put into the form field
   let formText = document.getElementById("name").value;
+  // console.log(process.env.TARGET_PATH);
   //   Client.checkForName(formText);
   // console.log(validateUrl);
   !validateUrl(formText)
     ? alert("Invalid URL")
-    : sendUrlToServer(`${process.env.TARGET_PATH}`, { url: formText }).then(
+    : sendUrlToServer("http://localhost:8081/add", { url: formText }).then(
         (finalData) => {
           // console.log(finalData);
           // document.getElementById("text").innerHTML = `text: ${finalData[0].text}`;
