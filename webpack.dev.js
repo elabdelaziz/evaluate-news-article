@@ -41,9 +41,9 @@ module.exports = {
       cleanStaleWebpackAssets: true,
       protectWebpackAssets: false,
     }),
-    new EnvironmentPlugin({
-      TARGET_PATH: "http://localhost:8081/add",
-    }),
+    // new EnvironmentPlugin({
+    //   TARGET_PATH: "http://localhost:8081/add",
+    // }),
     // new WorkboxPlugin.GenerateSW(),
   ],
 };

@@ -21,12 +21,14 @@ app.use(express.static("dist"));
 // console.log(__dirname);
 
 app.get("/", function (req, res) {
-  res.sendFile(path.resolve(__dirname, "dist/index.html"));
+  res.sendFile("dist/index.html");
   // res.sendFile(path.resolve("src/client/views/index.html"));
 });
+
+const port = process.env.PORT || 8081;
 // designates what port the app will listen to for incoming requests
-app.listen(process.env.PORT || 8081, function () {
-  console.log("Example app listening on port 8081!");
+app.listen(port, function () {
+  console.log(`Example app listening on port ${port}`);
 });
 
 app.get("/test", function (req, res) {
@@ -66,7 +68,3 @@ app.post("/add", async (req, res) => {
     console.log(error.message);
   }
 });
-
-module.exports = {
-  app,
-};

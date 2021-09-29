@@ -10,10 +10,7 @@ function handleSubmit(event) {
   // console.log(validateUrl);
   !validateUrl(formText)
     ? alert("Invalid URL")
-    : sendUrlToServer(
-        `${process.env.PORT}/add` || "https://localhost:8081/add",
-        { url: formText }
-      ).then((finalData) => {
+    : sendUrlToServer("/add", { url: formText }).then((finalData) => {
         // console.log(finalData);
         // document.getElementById("text").innerHTML = `text: ${finalData[0].text}`;
 
